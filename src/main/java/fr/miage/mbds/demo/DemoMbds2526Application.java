@@ -1,7 +1,8 @@
 package fr.miage.mbds.demo;
 
+import fr.miage.mbds.demo.dto.UserCreateDTO;
 import fr.miage.mbds.demo.model.User;
-import fr.miage.mbds.demo.service.UserService;
+import fr.miage.mbds.demo.service.UserServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,9 +18,9 @@ public class DemoMbds2526Application {
     }
 
     @Bean
-    CommandLineRunner init(UserService userService) {
+    CommandLineRunner init(UserServiceImpl userService) {
         return args -> {
-            User user = User.builder()
+            UserCreateDTO user = UserCreateDTO.builder()
                     .nom("Bob")
                     .prenom("Dylan")
                     .email("bob.dylan@gmail.com")

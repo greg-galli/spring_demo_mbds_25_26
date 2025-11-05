@@ -1,6 +1,7 @@
 package fr.miage.mbds.demo.controller;
 
-import fr.miage.mbds.demo.model.User;
+import fr.miage.mbds.demo.dto.UserCreateDTO;
+import fr.miage.mbds.demo.dto.UserResponseDTO;
 import fr.miage.mbds.demo.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,13 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> findAll() {
+    public List<UserResponseDTO> findAll() {
         return userService.findAll();
     }
 
     @GetMapping("/{id}")
-    public User findById(@PathVariable Long id) {
-        User user = userService.findById(id);
+    public UserResponseDTO findById(@PathVariable Long id) {
+        UserResponseDTO user = userService.findById(id);
         if (user == null) {
             throw new EntityNotFoundException("User not found with id: " + id);
         }
@@ -34,7 +35,8 @@ public class UserController {
     }
 
     @PostMapping
-    public User create(@RequestBody User user) {
-        return userService.saveAndFlush(user);
+    public UserResponseDTO create(@RequestBody UserCreateDTO user) {
+        return userService.save(user);
     }
+
 }
